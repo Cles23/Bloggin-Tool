@@ -3,35 +3,39 @@ const router = express.Router();
 
 // Route for Author Home Page
 router.get('/', (req, res) => {
-    // Logic to get all the articles written by the author, including the like counts
-    global.db.all(`
-        SELECT 
-            articles.*, 
-            (SELECT COUNT(*) FROM likes WHERE likes.article_id = articles.id) AS likes 
-        FROM articles 
-        WHERE articles.author_id = 1
-    `, (err, articles) => {
-        if (err) {
-            res.status(400).json({ "error": err.message });
-            return;
-        }
-        let drafts = articles.filter(article => article.published_at === null);
-        let published = articles.filter(article => article.published_at !== null);
-
-        // Get blog title and author's name directly from the blog table
-        global.db.get('SELECT blog_title, author_name FROM blog WHERE id = 1', (err, blog) => { // Assuming id = 1 for the demo
+    if (req.session.user) {
+        // Logic to get all the articles written by the author, including the like counts
+        global.db.all(`
+            SELECT 
+                articles.*, 
+                (SELECT COUNT(*) FROM likes WHERE likes.article_id = articles.id) AS likes 
+            FROM articles 
+            WHERE articles.author_id = ?
+        `, [req.session.user.user_id], (err, articles) => {
             if (err) {
                 res.status(400).json({ "error": err.message });
                 return;
             }
-
-            res.render('author_home', {
-                drafts,
-                published,
-                blog
+            let drafts = articles.filter(article => article.published_at === null);
+            let published = articles.filter(article => article.published_at !== null);
+    
+            // Get blog title and author's name directly from the blog table
+            global.db.get('SELECT blog_title, author_name FROM blog WHERE id = ?', [req.session.user.user_id], (err, blog) => { // Assuming id = 1 for the demo
+                if (err) {
+                    res.status(400).json({ "error": err.message });
+                    return;
+                }
+    
+                res.render('author_home', {
+                    drafts,
+                    published,
+                    blog
+                });
             });
         });
-    });
+    } else {
+      res.redirect('/users/login');
+    }
 });
 
 // Other routes remain the same...

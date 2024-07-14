@@ -5,6 +5,7 @@
 
 // Set up express, bodyparser and EJS
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const port = 3000;
 var bodyParser = require("body-parser");
@@ -25,6 +26,15 @@ global.db = new sqlite3.Database('./database.db',function(err){
     }
 });
 
+
+// Use session middleware
+app.use(session({
+    secret: 'clemente_ki', // Replace with a strong unique key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Set secure to true if using HTTPS
+}));
+
 // Handle requests to the home page 
 app.get('/', (req, res) => {
     res.render('home_page'); // render the home_page.ejs file
@@ -39,6 +49,9 @@ app.use('/authors', authorRoutes);
 
 const readerRoutes = require('./routes/readers');
 app.use('/readers', readerRoutes);
+
+const userRoutes = require('./routes/users');
+app.use('/users', userRoutes);
 
 
 

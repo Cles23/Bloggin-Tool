@@ -8,7 +8,8 @@ BEGIN TRANSACTION;
 
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_name TEXT NOT NULL
+    user_name TEXT NOT NULL,
+    hashed_password TEXT
 );
 
 CREATE TABLE IF NOT EXISTS email_accounts (
