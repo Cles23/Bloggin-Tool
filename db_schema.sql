@@ -53,7 +53,9 @@ CREATE TABLE IF NOT EXISTS blog (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     blog_title TEXT NOT NULL,
     author_name TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    author_id INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (author_id) REFERENCES users(user_id)
 );
 
 
@@ -71,10 +73,12 @@ INSERT INTO email_accounts ('email_address', 'user_id') VALUES ('dianne@yahoo.co
 INSERT INTO articles ('author_id', 'title', 'content') VALUES (1, 'First Article', 'This is the first article');
 INSERT INTO articles ('author_id', 'title', 'content') VALUES (2, 'Second Article', 'This is the second article');
 INSERT INTO articles ('author_id', 'title', 'content', 'published_at') VALUES (1, 'Third Article', 'This is the third article', '2021-01-03 12:00:00');
+INSERT INTO articles ('author_id', 'title', 'content', 'published_at') VALUES (2, 'Fourth Article', 'This is the fourth article', '2021-01-03 13:00:00');
 
 -- Insert blog data
-INSERT INTO blog ('blog_title', 'author_name') VALUES ('My Blog', 'Simon Star');
-INSERT INTO blog ('blog_title', 'author_name') VALUES ('Another Blog', 'Harry Hilbert');
+INSERT INTO blog ('blog_title', 'author_name', 'author_id') VALUES ('My Blog', 'Simon Star', 1);
+INSERT INTO blog ('blog_title', 'author_name', 'author_id') VALUES ('Another Blog', 'Harry Hilbert', 2);
+
 
 
 COMMIT;

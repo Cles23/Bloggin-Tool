@@ -15,7 +15,7 @@
             <label for="title" id="article_title">Title</label><br><br>
             <input type="text" id="article_title_box" name="title" value="<%= article.title %>"><br><br>
             <label for="content" id="article_content">Article Text</label><br><br>
-            <textarea id="article_content_box" name="content"><%= article.content %></textarea><br><br>
+            <textarea id="edit_article_content_box" name="content"><%= article.content %></textarea><br><br>
             <button type="submit" class="submit_changes">SUBMIT</button>
             <p>Created at: <%= article.created_at %></p>
             <p>Last modified: <%= article.updated_at %></p>

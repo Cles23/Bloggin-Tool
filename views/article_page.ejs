@@ -9,32 +9,37 @@
 <body class="article_page">
     <%- include('_navbar') %>
     <h1>Article Page</h1>
-    <div class="main_content">
-        <h2><%= article.title %></h2>
-        <div>
-            <p><%= article.content %></p>
+    <div class="main_content" id="article_page"> 
+        <div class="header">
+            <a href="/readers" id="arrow_back">←</a>
+            <div class='article_info'>
+                <h2><%= article.title %></h2>
+                <h3>By: <%= author %></h3>
+            </div>
+            <form action="/readers/article/<%= article.id %>/like" method="post" class="likes_form">
+                <button type="submit" class="like_button">❤</button>
+                <p>Likes: <%= likes %></p>
+            </form>
+        </div>
+        <div class="article_content">
+            <p><%- article.content.replace(/\n/g, '<br>') %></p>
         </div>
         <p>Published: <%= article.published_at %></p>
-        <p>Likes: <%= likes %></p>
-        <form action="/readers/article/<%= article.id %>/like" method="post">
-            <button type="submit">Like</button>
-        </form>
-        <h3>Comments</h3>
-        <form action="/readers/article/<%= article.id %>/comment" method="post">
-            <label for="comment">Comment:</label>
-            <textarea id="comment" name="comment" required></textarea><br><br>
-            <button type="submit">Submit Comment</button>
-        </form>
-        <ul>
-            <% comments.forEach(comment => { %>
-                <li>
-                    <strong><%= comment.user_name %>:</strong>
-                    <p><%= comment.comment %></p>
-                    <p><small>Posted on: <%= comment.created_at %></small></p>
-                </li>
-            <% }); %>
-        </ul>
-        <a href="/readers">Back to Reader Home Page</a>
+        <div class="article_footer">
+            <h3>Comments</h3>
+            <ul class="comment_list">
+                <% comments.forEach(comment => { %>
+                    <li>
+                        <strong><%= comment.user_name %> - <%= comment.created_at %></strong>
+                        <p><%= comment.comment %></p>
+                    </li>
+                <% }); %>
+            </ul>
+            <form action="/readers/article/<%= article.id %>/comment" method="post" class ="comment_form">
+                <textarea id="comment" name="comment" required></textarea>
+                <button type="submit" class="submit_comment_button">COMMENT</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

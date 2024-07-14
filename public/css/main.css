@@ -82,6 +82,7 @@ body{
     background-color: darkorange;
 }
 /*--------MAIN CONTENT STYLE-------*/
+
 /*--------------------------------------*/
 .main_content {
     margin: 0 2vw;
@@ -188,20 +189,34 @@ table button:hover {
     transition: all 0.3s ease 0s;
 }
 
-.settings a:hover, .save_button:hover, .submit_changes:hover {
+.settings a:hover, .save_button:hover, .submit_changes:hover, .submit_comment_button:hover, .like_button:hover {
     background-color: darkorange;
 }
 /*--------------------------------------*/
 /*---------SETTINGS, EDIT ARTICLE AND READER PAGE STYLE---------*/
-.form_settings, .edit_article_form, .reader_info{
+.form_settings, .edit_article_form{
     padding: 1rem 3rem;
 }
+
 #blog_title, #author_name, #article_title, #article_content{
     font-size: 2rem;
     font-weight: 600;
     padding: 0;
 }
-#blog_title_box, #author_name_box, #article_title_box, #article_content_box{
+#edit_article_content_box{
+    position: relative;
+    display: inline-block;
+    resize: none;
+    width: 30vw;
+    height: 20vh;
+    font-size: 16px;
+    padding: 13px;
+    border: 1px solid rgb(14, 14, 14);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+#blog_title_box, #author_name_box, #article_title_box{
     position: relative;
     display: inline-block;
     width: 15vw;
@@ -212,7 +227,7 @@ table button:hover {
     outline: none;
     transition: border-color 0.3s;
 }
-#blog_title_box:focus , #author_name_box:focus, #article_title_box:focus, #article_content_box:focus{
+#blog_title_box:focus , #author_name_box:focus, #article_title_box:focus, #edit_article_content_box:focus{
     border-color: darkorange;
 }
 
@@ -253,7 +268,7 @@ table button:hover {
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1.2rem;
     width: 15rem;
     transition: all 0.5s;
 }
@@ -279,4 +294,97 @@ table button:hover {
     color: #666;
     margin-top: 0;
     transition: color 0.3s;
+}
+
+/*----------------ARTICLE PAGE----------------------*/
+.like_button{
+    padding: 8px 12px;
+    color: white;
+    background: rgb(14, 14, 14);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+.article_info h2, #article_page #arrow_back, .article_info h3, .likes_form{
+    margin: 0rem;
+}
+.article_info{
+    padding: 0 4rem;
+}
+.article_page .header{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 1rem;
+}
+.likes_form p{
+    margin-bottom: 0;
+}
+.article_content{
+    padding: 1rem 0;
+    font-size: 1.2rem;
+    line-height: 1.6; 
+    margin-bottom: 3rem;
+}
+.article_content p {
+    margin-bottom: 1.5rem; 
+    width: 90%; 
+    margin: 0 auto; 
+    text-align: center; 
+}
+
+/*-----------------FOOTER STYLE-------------------*/
+.article_footer{
+    display: block;
+    text-align: left;
+}
+
+.article_footer h3{
+    margin-left: 10px;
+}
+.comment_form{
+    display: flex;
+    margin: 1rem 0;
+}
+.comment_list {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: left;
+    width: 35rem;
+    overflow-wrap: break-word;
+}
+
+.comment_list li {
+    margin-bottom: .5rem;
+    padding: .5rem;
+    padding-left: 1.2rem;
+    border-radius: 20px;
+    background: rgb(229, 229, 229);
+    
+}
+.comment_list li p{
+    margin: 5px 0 0 0;
+}
+
+.comment_form textarea {
+    width: 40rem; 
+    height: 3.4rem; 
+    resize: none;
+    font-size: 1rem;
+    border: 1px solid #121212; 
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 1rem;
+    outline: none;
+}
+.submit_comment_button{
+    padding: 8px 23px;
+    color: white;
+    background: rgb(14, 14, 14);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }

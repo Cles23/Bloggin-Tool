@@ -3,26 +3,44 @@ const router = express.Router();
 
 // Route for Reader Home Page
 router.get('/', (req, res) => {
-    global.db.all('SELECT * FROM articles WHERE published_at IS NOT NULL ORDER BY published_at DESC', (err, articles) => {
+    global.db.all('SELECT * FROM blog', (err, blogs) => {
         if (err) {
             res.status(400).json({ "error": err.message });
             return;
         }
 
-        global.db.get('SELECT blog_title, author_name FROM blog WHERE id = 1', (err, blog) => { // Assuming id = 1 for the demo
-            if (err) {
-                res.status(400).json({ "error": err.message });
-                return;
-            }
+        let blogsWithArticles = [];
 
-            res.render('reader_home', {
-                articles,
-                blog
+        let remaining = blogs.length;
+
+        if (remaining === 0) {
+            res.render('reader_home', { blogs: [] });
+            return;
+        }
+
+        blogs.forEach((blog, index) => {
+            global.db.all('SELECT * FROM articles WHERE author_id = ? AND published_at IS NOT NULL ORDER BY published_at DESC', [blog.author_id], (err, articles) => {
+                if (err) {
+                    res.status(400).json({ "error": err.message });
+                    return;
+                }
+
+                blogsWithArticles.push({
+                    blog_title: blog.blog_title,
+                    author_name: blog.author_name,
+                    articles: articles
+                });
+
+                remaining--;
+
+                if (remaining === 0) {
+                    res.render('reader_home', { blogs: blogsWithArticles });
+                }
             });
         });
     });
 });
-
+console.log('Reader Home Page');
 // Route for Reader Article Page
 router.get('/article/:id', (req, res) => {
     const { id } = req.params;
@@ -32,27 +50,32 @@ router.get('/article/:id', (req, res) => {
             res.status(400).json({ "error": err.message });
             return;
         }
-
-        global.db.get('SELECT COUNT(*) as likes FROM likes WHERE article_id = ?', [id], (err, likeData) => {
+        global.db.get('SELECT blog_title, author_name FROM blog WHERE id = ?', [article.author_id], (err, blog) => {
             if (err) {
                 res.status(400).json({ "error": err.message });
                 return;
             }
-
-            global.db.all('SELECT * FROM comments WHERE article_id = ? ORDER BY created_at DESC', [id], (err, comments) => {
+            global.db.get('SELECT COUNT(*) as likes FROM likes WHERE article_id = ?', [id], (err, likeData) => {
                 if (err) {
                     res.status(400).json({ "error": err.message });
                     return;
                 }
 
-                res.render('article_page', {
-                    article,
-                    likes: likeData.likes,
-                    comments
+                global.db.all('SELECT * FROM comments WHERE article_id = ? ORDER BY created_at DESC', [id], (err, comments) => {
+                    if (err) {
+                        res.status(400).json({ "error": err.message });
+                        return;
+                    }
+
+                    res.render('article_page', {
+                        article,
+                        likes: likeData.likes,
+                        comments,
+                        author: blog.author_name
+                    });
                 });
             });
         });
-        
     });
 });
 

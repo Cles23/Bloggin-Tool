@@ -8,12 +8,22 @@
 </head>
 <body class="home_page">
     <%- include('_navbar') %>
-    <div class="main_content">
+    <div class="first_content">
         <h1>Blogging Tool</h1>
-        <ul>
-            <li><a href="/authors">Go to Author Home Page</a></li>
-            <li><a href="/readers">Go to Reader Home Page</a></li>
-        </ul>
+        <div class='main_content'>
+                <h2>Log In</h2>
+                <form action="/login" method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit">Log In</button>
+                </form>
+                <ul>
+                    <li><a href="/authors">Go to Author Home Page</a></li>
+                    <li><a href="/readers">Go to Reader Home Page</a></li>
+                </ul>
+        </div>
     </div>
 </body>
 </html>
