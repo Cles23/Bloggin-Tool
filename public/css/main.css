@@ -219,6 +219,7 @@ table button:hover {
 #blog_title_box, #author_name_box, #article_title_box, .input_box{
     position: relative;
     display: inline-block;
+    margin-top: 1rem;
     width: 15vw;
     font-size: 16px;
     padding: 13px;
@@ -227,7 +228,7 @@ table button:hover {
     outline: none;
     transition: border-color 0.3s;
 }
-#blog_title_box:focus , #author_name_box:focus, #article_title_box:focus, #edit_article_content_box:focus{
+#blog_title_box:focus , #author_name_box:focus, #article_title_box:focus, #edit_article_content_box:focus, .input_box:focus{
     border-color: darkorange;
 }
 
@@ -278,7 +279,7 @@ table button:hover {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     border-color: darkorange;
 }
-.card:hover p {
+.card:hover p, #signup_p:hover {
     color: darkorange;
 }
 .card h3 {
@@ -387,4 +388,18 @@ table button:hover {
     transition: all 0.3s ease 0s;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+}
+
+#signup_p{
+    transition: color 0.3s;
+}
+
+#login_h2{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#reader_home{
+    padding: 2rem;
+    margin: 1rem;
 }

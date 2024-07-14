@@ -9,10 +9,9 @@
 <body class="reader_home">
     <%- include('_navbar') %>
     <h1>Reader Home Page</h1>
-
         <div class="reader_info">
             <% blogs.forEach(blog => { %> 
-                <div class="main_content">
+                <div class="main_content" id="reader_home">
                     <h2><%= blog.blog_title %></h2>
                     <h3>by <%= blog.author_name %></h3>
                     <h4>Published Articles</h4>
@@ -27,6 +26,5 @@
                 </div>
             <% }); %>
         </div>
-
 </body>
 </html>

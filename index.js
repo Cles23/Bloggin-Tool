@@ -35,14 +35,16 @@ app.use(session({
     cookie: { secure: false } // Set secure to true if using HTTPS
 }));
 
-// Handle requests to the home page 
+// Handle requests to login page 
 app.get('/', (req, res) => {
+    res.render('login'); // render the home_page.ejs file
+});
+// Handle requests to the home page
+app.get('/home_page', (req, res) => {
     res.render('home_page'); // render the home_page.ejs file
 });
 
 // Handle requests to the about page
-// const usersRoutes = require('./routes/users');
-// app.use('/users', usersRoutes);
 
 const authorRoutes = require('./routes/authors');
 app.use('/authors', authorRoutes);

@@ -7,18 +7,21 @@
     <link rel="stylesheet" href="https://use.typekit.net/oqh1yqs.css">
 </head>
 <body class="home_page">
-    <%- include('_navbar') %>
-    <div class="first_content">
-        <h1>Blogging Tool</h1>
-        <div class='main_content'>
-                <h2>Log In</h2>
-                <form action="/users/login" method="POST">
-                    <label for="user_name">Username</label>
-                    <input type="text" class="input_box" id="user_name" name="user_name" required><br></br>
-                    <label for="password">Password</label>
-                    <input type="password" class="input_box" id="password" name="password" required><br></br>
-                    <button type="submit" id="button">Log In</button>
-                </form>
+    <nav class = 'navbar'>
+        <a href="/home_page" id="home_button">B<span id="dot">.</span></a>
+        <form action="/users/logout">
+        <button type="submit" class="logout_button">LOGOUT</button>
+        </form>
+    </nav>
+    <h1>Welcome!</h1>
+    <div class="main_content">
+        <div class="links">
+            <form action="/authors" method="get">
+                <button type="submit" id="button" class="button">AUTHOR HOME</button>
+            </form>
+            <form action="/readers" method="get">
+                <button type="submit" id="button" class="button">READER HOME</button>
+            </form>
         </div>
     </div>
 </body>

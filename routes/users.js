@@ -28,36 +28,43 @@ router.post('/signup', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 8);
 
-    global.db.all("INSERT INTO users ('user_name', 'hashed_password') VALUES (?, ?)", [user_name, hashedPassword], function(err) {
+    global.db.run("INSERT INTO users (user_name, hashed_password) VALUES (?, ?)", [user_name, hashedPassword], function(err) {
         if (err) {
             res.status(400).json({"error": err.message});
             return;
         }
-        res.redirect(`/`); // Redirect to the edit page of the new article
+
+        const userId = this.lastID;
+
+        global.db.run("INSERT INTO blog (blog_title, author_name, author_id) VALUES (?, ?, ?)", [`Blog of ${user_name}`, user_name, userId], function(err) {
+            if (err) {
+                res.status(400).json({"error": err.message});
+                return;
+            }
+            res.redirect(`/`);
+        });
     });
 })
 
 router.post('/login', async (req, res) => {
     const {user_name, password } = req.body;
-    global.db.all("SELECT * FROM users WHERE user_name = ?", [user_name], async (err, user) => {
+    global.db.get("SELECT * FROM users WHERE user_name = ?", [user_name], async (err, user) => {
         if (err) {
             res.status(400).json({ "error": err.message });
             return;
         }
-        user = user[0];
         if (!user || !(await bcrypt.compare(password, user.hashed_password))) {
-            return res.status(401).json({ "message": "Invalid credentials" });
+            return res.render('login', { error: "Invalid credentials" });
         }
 
         req.session.user = { user_id: user.user_id, user_name: user.user_name };
-        //const token = jwt.sign({userId: user.user_name}, secretKey, { expiresIn: '1h'});
         res.render('home_page');
     });
 })
 
 router.get("/logout", (req, res) => {
     req.session.user = undefined;
-    res.render('home_page');
+    res.render('login');
 });
 
 /**

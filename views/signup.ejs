@@ -2,18 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type="text/css" href="/main.css" />
-    <title>Add User</title>
+    <title>Login Page</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/oqh1yqs.css">
 </head>
-<body>
-    <h1>Add User</h1>
-    <form action="/users/signup" method="POST">
-        <label for="user_name">Username</label>
-        <input type="text" class="input_box" id="user_name" name="user_name" required><br></br>
-        <label for="password">Password</label>
-        <input type="password" class="input_box" id="password" name="password" required><br></br>
-        <button type="submit">Create a new user record</button>
-    </form>
+<body class="signup_page">
+    <h1>Sign Up</h1>
+    <div class='main_content'>
+        <a href="/" id="arrow_back">←</a>
+        <form id="signupForm" action="/users/signup" method="POST">
+            <input type="text" class="input_box" id="user_name" name="user_name" placeholder="Username" required><br><br>
+            <input type="password" class="input_box" id="password" name="password" placeholder="Password" required><br><br>
+            <input type="password" class="input_box" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required><br><br>
+            <button type="submit" id="button">SIGN UP</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
 </body>
 </html>
