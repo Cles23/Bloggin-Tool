@@ -189,7 +189,7 @@ table button:hover {
     transition: all 0.3s ease 0s;
 }
 
-.settings a:hover, .save_button:hover, .submit_changes:hover, .submit_comment_button:hover, .like_button:hover {
+.settings a:hover, .save_button:hover, .submit_changes:hover, .submit_comment_button:hover, .like_button:hover, #button:hover {
     background-color: darkorange;
 }
 /*--------------------------------------*/
@@ -216,7 +216,7 @@ table button:hover {
     outline: none;
     transition: border-color 0.3s;
 }
-#blog_title_box, #author_name_box, #article_title_box{
+#blog_title_box, #author_name_box, #article_title_box, .input_box{
     position: relative;
     display: inline-block;
     width: 15vw;
@@ -231,7 +231,7 @@ table button:hover {
     border-color: darkorange;
 }
 
-.save_button, .submit_changes{
+.save_button, .submit_changes, #button{
     margin: 1rem 0;
     padding: 8px 23px;
     color: white;
