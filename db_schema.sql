@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS email_accounts (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
--- Create necessary tables for articles, commments and likes (Code written by me)
+-- Create necessary tables for articles, commments and likes (Code written by me below)
 
 CREATE TABLE IF NOT EXISTS articles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
