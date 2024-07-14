@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Read Article Page</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/oqh1yqs.css">
+</head>
+<body class="article_page">
+    <%- include('_navbar') %>
+    <h1>Article Page</h1>
+    <div class="main_content">
+        <h2><%= article.title %></h2>
+        <div>
+            <p><%= article.content %></p>
+        </div>
+        <p>Published: <%= article.published_at %></p>
+        <p>Likes: <%= likes %></p>
+        <form action="/readers/article/<%= article.id %>/like" method="post">
+            <button type="submit">Like</button>
+        </form>
+        <h3>Comments</h3>
+        <form action="/readers/article/<%= article.id %>/comment" method="post">
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" required></textarea><br><br>
+            <button type="submit">Submit Comment</button>
+        </form>
+        <ul>
+            <% comments.forEach(comment => { %>
+                <li>
+                    <strong><%= comment.user_name %>:</strong>
+                    <p><%= comment.comment %></p>
+                    <p><small>Posted on: <%= comment.created_at %></small></p>
+                </li>
+            <% }); %>
+        </ul>
+        <a href="/readers">Back to Reader Home Page</a>
+    </div>
+</body>
+</html>

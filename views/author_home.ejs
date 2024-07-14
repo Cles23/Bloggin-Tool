@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Author Home Page</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/oqh1yqs.css">
+</head>
+<body class="author_home">
+    <%- include('_navbar') %>
+    <h1>Author Home Page</h1>
+    <div class="main_content">
+        <div class="header">
+            <div class="author_info">
+                <h2><%= blog.blog_title %></h2> 
+                <h3>by <%= blog.author_name %></h3>
+            </div>
+            <div class="settings">
+                <a href="/authors/settings_page">SETTINGS</a>
+            </div>
+        </div>
+        <!-- Display the number of drafts and published articles -->
+         <div class = 'drafts_articles'>
+            <h4>Draft Articles</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>TITLE</th>
+                        <th>CREATED</th>
+                        <th>MODIFIED</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- This is a loop that will iterate over each article in the drafts array -->
+                    <% drafts.forEach(article => { %>
+                        <tr>
+                            <td><%= article.title %></td>
+                            <td><%= article.created_at %></td>
+                            <td><%= article.updated_at %></td>
+                            <td>
+                                <form action="/authors/edit/<%= article.id %>" method="get" style="display:inline;">
+                                    <button type="submit">EDIT</button>
+                                </form>
+                                <form action="/authors/delete/<%= article.id %>" method="post" style="display:inline;">
+                                    <button type="submit">DELETE</button>
+                                </form>
+                                <form action="/authors/publish/<%= article.id %>" method="post" style="display:inline;">
+                                    <button type="submit">PUBLISH</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                    <tr>
+                        <td colspan="4" class="add_draft_cell">
+                            <form action="/authors/new" method="post">
+                                <button type="submit" class="add_draft">+</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class = 'published_articles'>
+            <h4>Published Articles</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>TITLE</th>
+                        <th>CREATED</th>
+                        <th>PUBLISHED</th>
+                        <th>LIKES</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- This is a loop that will iterate over each article in the published array -->
+                    <% published.forEach(article => { %>
+                        <tr>
+                            <td><%= article.title %></td>
+                            <td><%= article.created_at %></td>
+                            <td><%= article.published_at %></td>
+                            <td><%= article.likes %></td>
+                            <td>
+                                <form action="/readers/article/<%= article.id %>" method="get" style="display:inline;">
+                                    <button type="submit">SHARE</button>
+                                </form>
+                                <form action="/authors/delete/<%= article.id %>" method="post" style="display:inline;">
+                                    <button type="submit">DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    
+    </div>
+</body>
+</html>

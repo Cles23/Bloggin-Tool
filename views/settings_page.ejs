@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings Page</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/oqh1yqs.css">
+</head>
+<body class="settings_page">
+    <%- include('_navbar') %>
+    <h1>Settings</h1>
+    <div class="main_content">
+        <a href="/authors" id="arrow_back">←</a>
+        <form action="/authors/settings_page" method="post" onsubmit="return validateForm()" class="form_settings">
+            <label for="blog_title" id="blog_title">Blog Title</label><br></br>
+            <input type="text" id="blog_title_box" name="blog_title" value="<%= blog.blog_title %>"><br><br>
+            <label for="author_name" id="author_name">Author Name</label><br></br>
+            <input type="text" id="author_name_box" name="author_name" value="<%= blog.author_name %>"><br><br>
+            <button type="submit" class="save_button">SAVE</button>
+        </form>
+    </div>
+    <!-- Add script to validate data -->
+    <script>
+        function validateForm() {
+            const blogTitle = document.getElementById('blog_title_box').value;
+            const authorName = document.getElementById('author_name_box').value;
+            let errorMessage = '';
+
+            if (blogTitle.trim() === '') {
+                errorMessage += 'Blog title is required.\n';
+            }
+            if (authorName.trim() === '') {
+                errorMessage += 'Author name is required.\n';
+            }
+
+            if (errorMessage !== '') {
+                alert(errorMessage);
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

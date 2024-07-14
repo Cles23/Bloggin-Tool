@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS email_accounts (
     email_account_id INTEGER PRIMARY KEY AUTOINCREMENT,
     email_address TEXT NOT NULL,
-    user_id  INT, --the user that the email account belongs to
+    user_id  INT, -- the user that the email account belongs to
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 -- Create necessary tables for articles, commments and likes (Code written by me)
 
 CREATE TABLE IF NOT EXISTS articles (
-    article_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     author_id INTEGER,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
@@ -32,35 +32,50 @@ CREATE TABLE IF NOT EXISTS articles (
 );
 
 CREATE TABLE IF NOT EXISTS comments (
-    comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     article_id INTEGER,
     user_name TEXT NOT NULL,
     comment TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (article_id) REFERENCES articles(article_id)
+    FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS likes (
-    like_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     article_id INTEGER,
     user_id INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (article_id) REFERENCES articles(article_id),
+    FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS blog (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    blog_title TEXT NOT NULL,
+    author_name TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 
 -- Insert default data (if necessary here)
 
 -- Set up three users
-INSERT INTO users ('user_name') VALUES ('Simon Star');
-INSERT INTO users ('user_name') VALUES ('Dianne Dean');
-INSERT INTO users ('user_name') VALUES ('Harry Hilbert');
+INSERT INTO users ('user_name') VALUES ('simon_1');
+INSERT INTO users ('user_name') VALUES ('harry_2');
 
 -- Give Simon two email addresses and Diane one, but Harry has none
 INSERT INTO email_accounts ('email_address', 'user_id') VALUES ('simon@gmail.com', 1); 
-INSERT INTO email_accounts ('email_address', 'user_id') VALUES ('simon@hotmail.com', 1); 
 INSERT INTO email_accounts ('email_address', 'user_id') VALUES ('dianne@yahoo.co.uk', 2); 
+
+-- Insert some articles
+INSERT INTO articles ('author_id', 'title', 'content') VALUES (1, 'First Article', 'This is the first article');
+INSERT INTO articles ('author_id', 'title', 'content') VALUES (2, 'Second Article', 'This is the second article');
+INSERT INTO articles ('author_id', 'title', 'content', 'published_at') VALUES (1, 'Third Article', 'This is the third article', '2021-01-03 12:00:00');
+
+-- Insert blog data
+INSERT INTO blog ('blog_title', 'author_name') VALUES ('My Blog', 'Simon Star');
+INSERT INTO blog ('blog_title', 'author_name') VALUES ('Another Blog', 'Harry Hilbert');
+
 
 COMMIT;
 

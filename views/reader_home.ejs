@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reader Home Page</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/oqh1yqs.css">
+</head>
+<body class="reader_home">
+    <%- include('_navbar') %>
+    <h1>Reader Home Page</h1>
+    <div class="main_content">
+        <div class="reader_info">
+            <h2><%= blog.blog_title %></h2>
+            <h3>by <%= blog.author_name %></h3>
+            <h4>Published Articles</h4>
+            <div class="cards_container">
+                <% articles.forEach(article => { %>
+                    <a href="/readers/article/<%= article.id %>" class="card">
+                        <h3><%= article.title %></h3>
+                        <p>Published on: <%= article.published_at %></p>
+                    </a>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

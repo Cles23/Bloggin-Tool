@@ -1,0 +1,282 @@
+/*Change the links text style*/
+* {
+    font-family: bicyclette, sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: rgb(14, 14, 14);
+    text-decoration: none;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #F6F6F6;
+    margin-top: 12vh;
+    text-align: center;
+}
+/*--------NAV BAR STYLE-------*/
+/*Customize navbar*/
+.navbar {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 9vh;
+    padding: 0 3vw;
+    min-height: 60px;
+    max-height: 80px;
+    justify-content: space-between;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    transition: all 300ms ease-in-out;
+}
+/*Change the home button style*/
+#home_button{
+    font-size: 3rem;
+    font-weight: 700;
+    transition: all 300ms ease-in-out;
+}
+#home_button:hover{
+    color: darkorange;
+
+}
+/*links style while keeping it centered*/
+.navbar ul{
+    display: flex;
+    padding-left: 3.5rem;
+}
+.navbar li {
+    list-style: none;
+    padding: 0 2vw;
+    position: relative;
+}
+/*---CREATE UNDERLINE EFFECT---*/
+.navbar li a::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: .10rem;
+    bottom: -5px;
+    left: 0;
+    background-color: rgb(14, 14, 14);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+.navbar li :hover::before {
+    transform: scaleX(0.6);
+}
+/*--------------------------*/
+/*Contact buttons*/
+.logout_button{
+    padding: 8px 23px;
+    color: white;
+    background: rgb(14, 14, 14);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+.logout_button:hover{
+    background-color: darkorange;
+}
+/*--------MAIN CONTENT STYLE-------*/
+/*--------------------------------------*/
+.main_content {
+    margin: 0 2vw;
+    margin-top: 5vh; /* Same height as the navbar */
+    background: rgb(255, 255, 255);
+    border-radius: 35px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.1);
+    padding: 0.5rem 2rem;
+    display: inline-block;
+    margin-top: 0;
+}
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.main_content h2{
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    
+}
+.main_content h3{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.main_content h4{
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+/*----------Author Home Style--------*/
+/* Table Style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+table th,
+table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+table tr{
+    transition: all 200ms ease-in-out;
+}
+table tr:hover {
+    background-color: rgba(255, 140, 0, 0.16);
+}
+
+table button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    color: white;
+    background-color: rgb(14, 14, 14);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+table button:hover {
+    background-color: darkorange;
+}
+.add_draft_cell{
+    padding: 0.8rem;
+}
+.add_draft{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Settings Link Style */
+.settings a {
+    display: inline-block;
+    font-size: .85rem;
+    padding: 8px 23px;
+    color: white;
+    background: rgb(14, 14, 14);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.settings a:hover, .save_button:hover, .submit_changes:hover {
+    background-color: darkorange;
+}
+/*--------------------------------------*/
+/*---------SETTINGS, EDIT ARTICLE AND READER PAGE STYLE---------*/
+.form_settings, .edit_article_form, .reader_info{
+    padding: 1rem 3rem;
+}
+#blog_title, #author_name, #article_title, #article_content{
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 0;
+}
+#blog_title_box, #author_name_box, #article_title_box, #article_content_box{
+    position: relative;
+    display: inline-block;
+    width: 15vw;
+    font-size: 16px;
+    padding: 13px;
+    border: 1px solid rgb(14, 14, 14);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+#blog_title_box:focus , #author_name_box:focus, #article_title_box:focus, #article_content_box:focus{
+    border-color: darkorange;
+}
+
+.save_button, .submit_changes{
+    margin: 1rem 0;
+    padding: 8px 23px;
+    color: white;
+    background: rgb(14, 14, 14);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+#arrow_back{
+    font-size: 2rem;
+    font-weight: 800;
+    padding: 0;
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+#arrow_back:hover{
+    color: darkorange;
+}
+
+.reader_info h2{
+    margin-top: 1.5rem;
+}
+/* Card styles */
+.cards_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 1rem; /* Space between cards */
+    margin: 2rem 0;
+}
+
+.card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 15rem;
+    transition: all 0.5s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border-color: darkorange;
+}
+.card:hover p {
+    color: darkorange;
+}
+.card h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: rgb(14, 14, 14);
+    margin-bottom: 0.5rem;
+    display: block;
+    transition: color 0.3s;
+}
+.card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0;
+    transition: color 0.3s;
+}
