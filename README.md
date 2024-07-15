@@ -1,4 +1,4 @@
-# Midterm Project - Blog Application
+#Blog Application
 
 Welcome to the Blog Application! This project showcases a simple yet powerful blog platform where users can sign up, create and manage blogs, write articles, and interact with other users through comments and likes.
 
